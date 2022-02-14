@@ -7,6 +7,7 @@ import { AppBar } from '@mui/material';
 import { Toolbar } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import { v4 as uuidv4 } from 'uuid';
 
 // Control the state of all the todos 
 
@@ -14,11 +15,11 @@ function TodoApp() {
   const initialTodos = [
     {id: 1, task: "Vaccum", completed: false },
     {id: 2, task: "Clean bathroom", completed: true },
-    {id: 1, task: "Wash dishes", completed: false }
+    {id: 3, task: "Wash dishes", completed: false }
   ]
   const [todos, setTodos] = useState(initialTodos);
   const addTodo = newTodoText => {
-    setTodos([...todos, {id: 4, task: newTodoText, completed: false}]);
+    setTodos([...todos, {id: uuidv4(), task: newTodoText, completed: false}]);
   };
   const removeTodo = todoId => {
     const updatedTodos = todos.filter(todo => todo.id !== todoId);
