@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-function Todo({task, id, completed, removeTodo, editTodo}) {
+function Todo({task, id, completed, removeTodo, editTodo, toggleTodo}) {
   const [isEditing, toggle] = useToggleState(false);
   return (
     <div>
@@ -25,14 +25,14 @@ function Todo({task, id, completed, removeTodo, editTodo}) {
         
           (
           <>{/* Todo: id, task, completed */}
-            <Checkbox/>
-            <ListItemText>{task}</ListItemText>
+            <Checkbox onClick={() => toggleTodo(id)}/>
+            <ListItemText style={{textDecoration: completed ? "line-through" : "none"}}>{task}</ListItemText>
             <ListItemSecondaryAction>
-              <IconButton onClick={() => removeTodo(id)}>
-                <DeleteIcon />
-              </IconButton>
               <IconButton onClick={toggle}>
                 <EditIcon />
+              </IconButton>
+              <IconButton onClick={() => removeTodo(id)}>
+                <DeleteIcon />
               </IconButton>
             </ListItemSecondaryAction>
           </>
