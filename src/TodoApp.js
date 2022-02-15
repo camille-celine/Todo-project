@@ -7,10 +7,7 @@ import { AppBar } from '@mui/material';
 import { Toolbar } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import { v4 as uuidv4 } from 'uuid';
-import useToggle from './hooks/useToggleState';
-
-// Control the state of all the todos 
+import useTodoState from "./hooks/useTodoState";
 
 function TodoApp() {
   const initialTodos = [
@@ -18,30 +15,10 @@ function TodoApp() {
     {id: 2, task: "Clean bathroom", completed: false },
     {id: 3, task: "Wash dishes", completed: false }
   ]
-  const [todos, setTodos] = useState(initialTodos);
-  const [state, toggleState] = useToggle();
-  const addTodo = newTodoText => {
-    setTodos([...todos, {id: uuidv4(), task: newTodoText, completed: false}]);
-  };
-  const removeTodo = todoId => {
-    const updatedTodos = todos.filter(todo => todo.id !== todoId);
-    setTodos(updatedTodos);
-  }
-  const editTodo = (todoId, newTask) => {
-    const updatedTodos = todos.map( todo => 
-      todo.id === todoId ? {...todo, task: newTask} : todo
-    );
-    setTodos(updatedTodos);
-  }
-  const toggleTodo = todoId => {
-    const updatedTodos = todos.map( todo => 
-      todo.id === todoId ? {...todo, completed: !todo.completed} : todo
-    );
-    setTodos(updatedTodos);
-  }
-  // onClick on the checkbox 
-  // toggle task completed
-  // cross out the task (style)
+
+  // Control the state of all the todos 
+  const {todos, addTodo, removeTodo, editTodo, toggleTodo} = useTodoState(initialTodos);
+  
   return (
     <Paper
       style={{
