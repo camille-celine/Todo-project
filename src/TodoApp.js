@@ -18,7 +18,7 @@ import Divider from '@mui/material/Divider';
 function TodoApp() {
 
   const initialProject = [{ id: 1, name: "My First Project"}];
-  // Control the state of all the projects
+  // .... Control the state of all the projects
   const {projects, addProject, removeProject} = useProjectState(initialProject);
 
   const drawerWidth = 240;
